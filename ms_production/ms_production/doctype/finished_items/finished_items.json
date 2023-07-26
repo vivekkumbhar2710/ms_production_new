@@ -1,0 +1,120 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:Prod-{DD}-{MM}-{YY}-{#####}",
+ "creation": "2023-07-17 15:41:04.932563",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "item",
+  "column_break_2jl4x",
+  "required_time",
+  "item_name",
+  "section_break_trddp",
+  "other_details",
+  "section_break_4qo9q",
+  "qty_details",
+  "section_break_tzizq",
+  "consumable_details",
+  "section_break_upnef",
+  "downtime_reason_details"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "column_break_2jl4x",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "480",
+   "fieldname": "required_time",
+   "fieldtype": "Float",
+   "label": "Required Time"
+  },
+  {
+   "fetch_from": "item.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name"
+  },
+  {
+   "fieldname": "section_break_trddp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "other_details",
+   "fieldtype": "Table",
+   "label": "Other Details",
+   "options": "Other Details"
+  },
+  {
+   "fieldname": "section_break_4qo9q",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "qty_details",
+   "fieldtype": "Table",
+   "label": "Qty Details",
+   "options": "Qty Details"
+  },
+  {
+   "fieldname": "section_break_tzizq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "consumable_details",
+   "fieldtype": "Table",
+   "label": "Consumable Details",
+   "options": "Consumable Details"
+  },
+  {
+   "fieldname": "section_break_upnef",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "downtime_reason_details",
+   "fieldtype": "Table",
+   "label": "Downtime Reason Details",
+   "options": "Downtime Reason Details"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-17 15:41:04.932563",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Finished Items",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

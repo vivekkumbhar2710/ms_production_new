@@ -1,0 +1,266 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:Prod-{DD}-{MM}-{YY}-{#####}",
+ "creation": "2023-06-27 17:20:14.541687",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "item",
+  "raw_item",
+  "column_break_2jl4x",
+  "required_time",
+  "machine",
+  "operation",
+  "section_break_tnkpx",
+  "source_warehouse",
+  "column_break_xsbqv",
+  "target_warehouse",
+  "column_break_0t2ax",
+  "cycle_time",
+  "section_break_trddp",
+  "ok_qty",
+  "cr_qty",
+  "column_break_hbpgr",
+  "mr_qty",
+  "rw_qty",
+  "column_break_tgas7",
+  "total_qty",
+  "worked_time",
+  "column_break_ksxjb",
+  "earned_time",
+  "time_difference",
+  "section_break_tzizq",
+  "consumable_details",
+  "section_break_upnef",
+  "item_rejection_reason",
+  "section_break_bnvja",
+  "downtime_reason_details",
+  "amended_from",
+  "stock_entry"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "downtime_reason_details",
+   "fieldtype": "Table",
+   "label": "Downtime Reason Details",
+   "options": "Downtime Reason Details"
+  },
+  {
+   "fieldname": "column_break_2jl4x",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_trddp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "section_break_tzizq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "480",
+   "fieldname": "required_time",
+   "fieldtype": "Float",
+   "label": "Required Time"
+  },
+  {
+   "fieldname": "consumable_details",
+   "fieldtype": "Table",
+   "label": "Consumable Details",
+   "options": "Consumable Details"
+  },
+  {
+   "fieldname": "section_break_upnef",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "item.raw_material",
+   "fieldname": "raw_item",
+   "fieldtype": "Link",
+   "label": "Raw Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Production",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "machine",
+   "fieldtype": "Link",
+   "label": "Machine",
+   "options": "Machine"
+  },
+  {
+   "fieldname": "operation",
+   "fieldtype": "Link",
+   "label": "Operation",
+   "options": "Operation"
+  },
+  {
+   "fieldname": "section_break_tnkpx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "--",
+   "fieldname": "source_warehouse",
+   "fieldtype": "Link",
+   "label": "Source Warehouse",
+   "options": "Warehouse",
+   "read_only": 1
+  },
+  {
+   "default": "--",
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "label": "Target Warehouse",
+   "options": "Warehouse",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "cycle_time",
+   "fieldtype": "Float",
+   "label": "Cycle Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_xsbqv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "column_break_0t2ax",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 4,
+   "fieldname": "ok_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "OK Qty"
+  },
+  {
+   "columns": 4,
+   "fieldname": "cr_qty",
+   "fieldtype": "Float",
+   "label": "CR Qty"
+  },
+  {
+   "columns": 4,
+   "fieldname": "mr_qty",
+   "fieldtype": "Float",
+   "label": "MR Qty"
+  },
+  {
+   "columns": 4,
+   "fieldname": "rw_qty",
+   "fieldtype": "Float",
+   "label": "RW Qty"
+  },
+  {
+   "fieldname": "column_break_tgas7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "worked_time",
+   "fieldtype": "Float",
+   "label": "Worked Time"
+  },
+  {
+   "default": "0",
+   "fieldname": "earned_time",
+   "fieldtype": "Float",
+   "label": "Earned Time",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "time_difference",
+   "fieldtype": "Float",
+   "label": "Time Difference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_hbpgr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ksxjb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_qty",
+   "fieldtype": "Float",
+   "label": "Total Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "item_rejection_reason",
+   "fieldtype": "Table",
+   "label": "Item Rejection Reason",
+   "options": "Item Rejection Reason"
+  },
+  {
+   "fieldname": "section_break_bnvja",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Stock Entry",
+   "options": "Stock Entry"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-07-25 17:35:04.225465",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Production",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
