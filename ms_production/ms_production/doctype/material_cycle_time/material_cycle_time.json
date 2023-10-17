@@ -1,0 +1,196 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-10-04 10:37:54.867563",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_details_tab",
+  "naming_series",
+  "company",
+  "section_break_jvjbb",
+  "item",
+  "item_name",
+  "column_break_rbhxe",
+  "from_date",
+  "to_date",
+  "production_tab",
+  "raw_item",
+  "column_break_mcsjh",
+  "raw_item_name",
+  "column_break_mulbi",
+  "required_qty",
+  "section_break_nryf1",
+  "operation",
+  "column_break_i9lwf",
+  "cycle_time",
+  "section_break_d32qo",
+  "machine_operation_plan",
+  "downstream_processes_tab",
+  "row_items"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "no_copy": 1,
+   "options": "MCT-",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_jvjbb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_mcsjh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "item.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_nryf1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "operation",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Operation",
+   "options": "Operation Master"
+  },
+  {
+   "fieldname": "column_break_i9lwf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cycle_time",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Cycle Time(In min)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_break_d32qo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "machine_operation_plan",
+   "fieldtype": "Table",
+   "label": "Machine Operation Plan",
+   "options": "Machine Item"
+  },
+  {
+   "fetch_from": "item.raw_material",
+   "fieldname": "raw_item",
+   "fieldtype": "Link",
+   "label": "Raw Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "raw_item.item_name",
+   "fieldname": "raw_item_name",
+   "fieldtype": "Data",
+   "label": "Raw Item Name"
+  },
+  {
+   "fieldname": "item_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Item Details"
+  },
+  {
+   "fieldname": "production_tab",
+   "fieldtype": "Tab Break",
+   "label": "Production"
+  },
+  {
+   "fieldname": "column_break_mulbi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "required_qty",
+   "fieldtype": "Float",
+   "label": "Required Qty",
+   "precision": "2"
+  },
+  {
+   "fieldname": "downstream_processes_tab",
+   "fieldtype": "Tab Break",
+   "label": "Downstream processes"
+  },
+  {
+   "fieldname": "row_items",
+   "fieldtype": "Table",
+   "label": "Row Items",
+   "options": "Raw Item Child"
+  },
+  {
+   "fieldname": "column_break_rbhxe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "default": "2100-01-01",
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-17 09:53:23.971176",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Material Cycle Time",
+ "name_case": "Title Case",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "item,item_name",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

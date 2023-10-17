@@ -9,38 +9,38 @@
  "engine": "InnoDB",
  "field_order": [
   "date",
-  "item",
-  "raw_item",
+  "supervisor",
+  "operator",
+  "expense_account_for_wages",
+  "job_order",
   "column_break_2jl4x",
+  "company",
+  "shift_time",
   "required_time",
-  "machine",
-  "operation",
+  "wages",
+  "section_break_tfgrr",
+  "items",
+  "column_break_em55u",
+  "raw_items",
   "section_break_tnkpx",
-  "source_warehouse",
-  "column_break_xsbqv",
-  "target_warehouse",
-  "column_break_0t2ax",
-  "cycle_time",
-  "section_break_trddp",
-  "ok_qty",
-  "cr_qty",
-  "column_break_hbpgr",
-  "mr_qty",
-  "rw_qty",
-  "column_break_tgas7",
+  "item_operations",
+  "section_break_mbdei",
+  "qty_details",
+  "section_break_ztqrp",
   "total_qty",
-  "worked_time",
-  "column_break_ksxjb",
-  "earned_time",
+  "column_break_ia6pd",
+  "total_earned_minutes",
+  "column_break_bkgdk",
   "time_difference",
   "section_break_tzizq",
+  "tooling_details",
+  "section_break_ixblj",
   "consumable_details",
   "section_break_upnef",
-  "item_rejection_reason",
+  "rejected_items_reasons",
   "section_break_bnvja",
   "downtime_reason_details",
-  "amended_from",
-  "stock_entry"
+  "amended_from"
  ],
  "fields": [
   {
@@ -60,21 +60,12 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "section_break_trddp",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "item",
-   "fieldtype": "Link",
-   "label": "Item",
-   "options": "Item"
-  },
-  {
    "fieldname": "section_break_tzizq",
    "fieldtype": "Section Break"
   },
   {
    "default": "480",
+   "fetch_from": "shift_time.minutes",
    "fieldname": "required_time",
    "fieldtype": "Float",
    "label": "Required Time"
@@ -90,13 +81,6 @@
    "fieldtype": "Section Break"
   },
   {
-   "fetch_from": "item.raw_material",
-   "fieldname": "raw_item",
-   "fieldtype": "Link",
-   "label": "Raw Item",
-   "options": "Item"
-  },
-  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -106,138 +90,164 @@
    "read_only": 1
   },
   {
-   "fieldname": "machine",
-   "fieldtype": "Link",
-   "label": "Machine",
-   "options": "Machine"
-  },
-  {
-   "fieldname": "operation",
-   "fieldtype": "Link",
-   "label": "Operation",
-   "options": "Operation"
-  },
-  {
    "fieldname": "section_break_tnkpx",
    "fieldtype": "Section Break"
-  },
-  {
-   "default": "--",
-   "fieldname": "source_warehouse",
-   "fieldtype": "Link",
-   "label": "Source Warehouse",
-   "options": "Warehouse",
-   "read_only": 1
-  },
-  {
-   "default": "--",
-   "fieldname": "target_warehouse",
-   "fieldtype": "Link",
-   "label": "Target Warehouse",
-   "options": "Warehouse",
-   "read_only": 1
-  },
-  {
-   "default": "0",
-   "fieldname": "cycle_time",
-   "fieldtype": "Float",
-   "label": "Cycle Time",
-   "read_only": 1
-  },
-  {
-   "fieldname": "column_break_xsbqv",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "column_break_0t2ax",
-   "fieldtype": "Column Break"
-  },
-  {
-   "columns": 4,
-   "fieldname": "ok_qty",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "OK Qty"
-  },
-  {
-   "columns": 4,
-   "fieldname": "cr_qty",
-   "fieldtype": "Float",
-   "label": "CR Qty"
-  },
-  {
-   "columns": 4,
-   "fieldname": "mr_qty",
-   "fieldtype": "Float",
-   "label": "MR Qty"
-  },
-  {
-   "columns": 4,
-   "fieldname": "rw_qty",
-   "fieldtype": "Float",
-   "label": "RW Qty"
-  },
-  {
-   "fieldname": "column_break_tgas7",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "worked_time",
-   "fieldtype": "Float",
-   "label": "Worked Time"
-  },
-  {
-   "default": "0",
-   "fieldname": "earned_time",
-   "fieldtype": "Float",
-   "label": "Earned Time",
-   "read_only": 1
-  },
-  {
-   "default": "0",
-   "fieldname": "time_difference",
-   "fieldtype": "Float",
-   "label": "Time Difference",
-   "read_only": 1
-  },
-  {
-   "fieldname": "column_break_hbpgr",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_ksxjb",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "total_qty",
-   "fieldtype": "Float",
-   "label": "Total Qty",
-   "read_only": 1
-  },
-  {
-   "fieldname": "item_rejection_reason",
-   "fieldtype": "Table",
-   "label": "Item Rejection Reason",
-   "options": "Item Rejection Reason"
   },
   {
    "fieldname": "section_break_bnvja",
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "stock_entry",
+   "fieldname": "section_break_tfgrr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Items Production",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_em55u",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "supervisor",
    "fieldtype": "Link",
-   "hidden": 1,
-   "label": "Stock Entry",
-   "options": "Stock Entry"
+   "in_list_view": 1,
+   "label": "Supervisor",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "operator",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Operator",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "default": "8 Hours 1 shift",
+   "fieldname": "shift_time",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Shift Time",
+   "options": "Shift Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_operations",
+   "fieldtype": "Table",
+   "label": "Item operations",
+   "options": "Item operations",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_mbdei",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "qty_details",
+   "fieldtype": "Table",
+   "label": "Qty Details",
+   "options": "Qty Details",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fetch_from": "item.raw_material",
+   "fieldname": "raw_items",
+   "fieldtype": "Table",
+   "label": "Raw Items",
+   "options": "Raw Items Production",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_qty",
+   "fieldtype": "Float",
+   "label": "Total Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_earned_minutes",
+   "fieldtype": "Float",
+   "label": "Total Earned Minutes",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ia6pd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_bkgdk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ztqrp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_ixblj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "time_difference",
+   "fieldtype": "Float",
+   "label": "Time Difference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tooling_details",
+   "fieldtype": "Table",
+   "label": "Tooling Details",
+   "options": "Tooling Details"
+  },
+  {
+   "fieldname": "rejected_items_reasons",
+   "fieldtype": "Table",
+   "label": "Rejected Items Reasons",
+   "options": "Item Rejection Reason"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "wages",
+   "fieldtype": "Currency",
+   "label": "Wages",
+   "read_only": 1
+  },
+  {
+   "default": "Expenses Included In Asset Valuation - PEPL",
+   "fieldname": "expense_account_for_wages",
+   "fieldtype": "Link",
+   "label": "Expense Account For Wages ",
+   "options": "Account"
+  },
+  {
+   "fieldname": "job_order",
+   "fieldtype": "Table MultiSelect",
+   "label": "Job Order",
+   "options": "Job Order Multi Select"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2023-07-25 17:35:04.225465",
+ "links": [
+  {
+   "link_doctype": "Stock Entry",
+   "link_fieldname": "production_entry",
+   "table_fieldname": "stock enry"
+  }
+ ],
+ "modified": "2023-10-16 10:28:55.924542",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Production",

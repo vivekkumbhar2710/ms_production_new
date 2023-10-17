@@ -1,0 +1,187 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-10-10 14:41:24.851886",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "item",
+  "item_name",
+  "column_break_mxtjn",
+  "company",
+  "material_cycle_time",
+  "shift_time",
+  "section_break_3nj0o",
+  "total_quantity_of_production",
+  "column_break_3e1ug",
+  "total_time",
+  "column_break_nmgv4",
+  "total_production_per_day",
+  "column_break_f8ymz",
+  "total_production_time",
+  "column_break_lowl1",
+  "total_qty_production_per_day",
+  "column_break_pkiyi",
+  "total_days_of_production",
+  "section_break_e5hol",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item ",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_mxtjn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "item.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "material_cycle_time",
+   "fieldtype": "Link",
+   "label": "Material Cycle Time",
+   "options": "Material Cycle Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_3nj0o",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_time",
+   "fieldtype": "Float",
+   "label": "Total Time To Create Item",
+   "precision": "2"
+  },
+  {
+   "fieldname": "total_quantity_of_production",
+   "fieldtype": "Float",
+   "label": "Total Quantity of Production",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_break_e5hol",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_production_time",
+   "fieldtype": "Float",
+   "label": "Total Time of Production (In Min)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3e1ug",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_nmgv4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "shift_time",
+   "fieldtype": "Table MultiSelect",
+   "label": "Shift Time",
+   "options": "Shift Multi select"
+  },
+  {
+   "fieldname": "column_break_f8ymz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_production_per_day",
+   "fieldtype": "Float",
+   "label": "Total Time of Production Per Day",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_lowl1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_qty_production_per_day",
+   "fieldtype": "Float",
+   "label": "Total Quantity of Production per day",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_pkiyi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_days_of_production",
+   "fieldtype": "Float",
+   "label": "Total Days Of production",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "PSH-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Production Schedule",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-10-13 13:09:03.540537",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Production Schedule",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

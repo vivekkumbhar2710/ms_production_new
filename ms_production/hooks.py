@@ -1,3 +1,4 @@
+import frappe
 from . import __version__ as app_version
 
 app_name = "ms_production"
@@ -200,6 +201,10 @@ app_license = "Developer MrAbhi"
 #	"ms_production.auth.validate"
 # ]
 
+ 
+
+# Call the add_hooks function to attach the hooks
+
 
 doc_events = {
 	# "*": {
@@ -207,8 +212,8 @@ doc_events = {
 	# 	"on_cancel": "method",
 	# 	"on_trash": "method"
 	# }
-    "Production":  {
+    # "Production":  {
         # /home/quantbitserver/bench06-alpha/apps/ms_production/ms_production/hooks.py
         # "before_save": "ms_production.ms_production.doctype.production.events.on_status_click"
-    }
+    # }
 }

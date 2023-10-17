@@ -1,0 +1,45 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-09 13:49:18.029419",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "from_date",
+  "column_break_a0gsv",
+  "wages_per_hour"
+ ],
+ "fields": [
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_a0gsv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "wages_per_hour",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Wages Per Hour",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-10-09 13:49:25.629199",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Child Wages Master",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

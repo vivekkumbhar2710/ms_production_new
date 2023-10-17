@@ -7,6 +7,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "job_order",
   "operation",
   "cycle_time",
   "ok_qty",
@@ -15,22 +16,25 @@
   "rw_qty",
   "column_break_tygpt",
   "total_qty",
-  "worked_time",
   "earned_min",
-  "time_diffrence"
+  "item",
+  "wages_per_item"
  ],
  "fields": [
   {
    "fieldname": "cycle_time",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Cycle Time"
+   "label": "Cycle Time",
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "fieldname": "ok_qty",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "OK Qty"
+   "label": "OK Qty",
+   "reqd": 1
   },
   {
    "fieldname": "cr_qty",
@@ -61,35 +65,44 @@
    "label": "Total Qty"
   },
   {
-   "fieldname": "worked_time",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Worked Time"
-  },
-  {
    "fieldname": "earned_min",
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Earned Min"
   },
   {
-   "fieldname": "time_diffrence",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Time Diffrence"
-  },
-  {
    "fieldname": "operation",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Operation",
-   "options": "Operation"
+   "options": "Operation Master",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "wages_per_item",
+   "fieldtype": "Currency",
+   "label": "Wages Per Item"
+  },
+  {
+   "fieldname": "job_order",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Job Order",
+   "options": "Job Order"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-07-01 13:06:53.709363",
+ "modified": "2023-10-13 10:07:26.657655",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Qty Details",

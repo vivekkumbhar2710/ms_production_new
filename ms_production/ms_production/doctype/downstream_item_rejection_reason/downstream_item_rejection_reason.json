@@ -1,0 +1,75 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-13 15:30:07.799845",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "job_order",
+  "rejection_reason",
+  "finished_item",
+  "rejection_type",
+  "qty",
+  "target_warehouse"
+ ],
+ "fields": [
+  {
+   "fieldname": "rejection_reason",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Rejection Reason ",
+   "options": "Rejection Reason",
+   "reqd": 1
+  },
+  {
+   "fieldname": "finished_item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Finished Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rejection_type",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "in_list_view": 1,
+   "label": "Rejection Type",
+   "options": "Rejection Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Qty",
+   "reqd": 1
+  },
+  {
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "label": "Target Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "job_order",
+   "fieldtype": "Link",
+   "label": "Job Order",
+   "options": "Job Order"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2023-10-13 16:26:26.192227",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Downstream Item Rejection Reason",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

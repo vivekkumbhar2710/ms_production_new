@@ -1,0 +1,244 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-10-11 16:20:13.016226",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_details_tab",
+  "naming_series",
+  "column_break_ue9rt",
+  "company",
+  "section_break_mc0vx",
+  "item",
+  "column_break_w0iih",
+  "item_name",
+  "default_warehouse_section",
+  "target_warehouse",
+  "column_break_ce0yt",
+  "source_warehouse",
+  "column_break_0mcon",
+  "cr_warehouse",
+  "column_break_enith",
+  "mr_warehouse",
+  "column_break_pvpmn",
+  "rw_warehouse",
+  "section_break_nhao1",
+  "production_process_tab",
+  "production_schedule",
+  "section_break_8jolr",
+  "total_quantity_of_production",
+  "column_break_4672u",
+  "total_time",
+  "column_break_rv15v",
+  "total_production_time",
+  "downstream_process_tab",
+  "raw_item",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Series",
+   "options": "JBO-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "production_schedule",
+   "fieldtype": "Link",
+   "label": "Production Schedule",
+   "options": "Production Schedule",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Job Order",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ue9rt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_mc0vx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_w0iih",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_8jolr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "production_schedule.total_quantity_of_production",
+   "fieldname": "total_quantity_of_production",
+   "fieldtype": "Float",
+   "label": "Total Quantity of Production",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_4672u",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "production_schedule.total_time",
+   "fieldname": "total_time",
+   "fieldtype": "Float",
+   "label": "Total Time To Create Item",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_rv15v",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "production_schedule.total_production_time",
+   "fieldname": "total_production_time",
+   "fieldtype": "Float",
+   "label": "Total Time of Production (In Min)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "item_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Item Details"
+  },
+  {
+   "fieldname": "production_process_tab",
+   "fieldtype": "Tab Break",
+   "label": "Production Process"
+  },
+  {
+   "fieldname": "downstream_process_tab",
+   "fieldtype": "Tab Break",
+   "label": "Downstream Process"
+  },
+  {
+   "fieldname": "default_warehouse_section",
+   "fieldtype": "Section Break",
+   "label": "default Warehouse"
+  },
+  {
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "label": "Target Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ce0yt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_warehouse",
+   "fieldtype": "Link",
+   "label": "Source Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_0mcon",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cr_warehouse",
+   "fieldtype": "Link",
+   "label": "CR Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mr_warehouse",
+   "fieldtype": "Link",
+   "label": "MR Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rw_warehouse",
+   "fieldtype": "Link",
+   "label": "RW Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_nhao1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_enith",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_pvpmn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "raw_item",
+   "fieldtype": "Table",
+   "label": "Raw Item",
+   "options": "JO Raw Item Child"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-10-17 09:27:47.459795",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Job Order",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
