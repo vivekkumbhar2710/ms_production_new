@@ -582,9 +582,9 @@ frappe.ui.form.on('Production', {
 
 
 // 	},
-// });
+// });hiiiiiii
 
-
+//h9i
 frappe.ui.form.on('Production', {
     job_order: function(frm) {
 		// frm.clear_table("items")
@@ -597,4 +597,6 @@ frappe.ui.form.on('Production', {
 		frm.refresh_field('raw_items')
     }
 });
+
+
 
