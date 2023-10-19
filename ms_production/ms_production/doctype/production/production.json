@@ -18,6 +18,7 @@
   "shift_time",
   "required_time",
   "wages",
+  "do_not_delete",
   "section_break_tfgrr",
   "items",
   "column_break_em55u",
@@ -236,6 +237,13 @@
    "fieldtype": "Table MultiSelect",
    "label": "Job Order",
    "options": "Job Order Multi Select"
+  },
+  {
+   "fieldname": "do_not_delete",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Do Not Delete",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -245,9 +253,17 @@
    "link_doctype": "Stock Entry",
    "link_fieldname": "production_entry",
    "table_fieldname": "stock enry"
+  },
+  {
+   "link_doctype": "Material Cycle Time",
+   "link_fieldname": "name"
+  },
+  {
+   "link_doctype": "Material Request",
+   "link_fieldname": "name"
   }
  ],
- "modified": "2023-10-16 10:28:55.924542",
+ "modified": "2023-10-19 10:37:09.275856",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Production",
@@ -270,7 +286,8 @@
    "write": 1
   }
  ],
+ "search_fields": "do_not_delete",
  "sort_field": "modified",
- "sort_order": "DESC",
+ "sort_order": "ASC",
  "states": []
 }

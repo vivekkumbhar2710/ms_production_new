@@ -10,7 +10,7 @@ class DownstreamProcesses(Document):
 		if (self.production) and (not self.downstream_process):
 			frappe.throw("Please select 'Downstream Process'")
 
-
+		t__w =frappe.get_value("Machine Shop Setting",self.company,"target_warehouse_dp")
 		for d in self.get("production"):
 			items_doc= frappe.get_all("Items Production" ,
 												filters = {"parent": str(d.production)},
@@ -20,21 +20,29 @@ class DownstreamProcesses(Document):
 						'job_order': (i.job_order) ,
 						'item': str(i.item),
 						'item_name': str(i.item_name),
-						'target_warehouse': i.target_warehouse,
+						'target_warehouse': t__w ,
 					},),
 	
 		# self.method_to_set_raw_item()
-				
+	@frappe.whitelist()
+	def set_warehouse_if_not(self):
+		target_ware =frappe.get_value("Machine Shop Setting",self.company,"target_warehouse_dp")
+		for t in self.get("items"):
+			if not t.target_warehouse:
+				t.target_warehouse=	target_ware
+
 	@frappe.whitelist()
 	def method_to_set_raw_item (self):
 		if not self.downstream_process:
 			frappe.throw("Please select 'Downstream Process'")
+		s__w =frappe.get_value("Machine Shop Setting",self.company,"source_warehouse_dp")
 		for i in self.get("items"):
 			if not i.item:
 				frappe.throw("Please insert Items")
 			if i.job_order:
 				tera = frappe.get_all('Raw Item Child', filters={'parent':(frappe.get_value("Production Schedule",(frappe.get_value("Job Order",(i.job_order),"production_schedule")),"material_cycle_time")),'downstream_process': self.downstream_process} ,fields=['item',"item_name","qty"])
 				for me in tera:
+
 					self.append("raw_items",{
 										'job_order': i.job_order,
 										'item': str(i.item),
@@ -43,6 +51,9 @@ class DownstreamProcesses(Document):
 										'raw_item_name': str(me.item_name),
 										'required_qty':me.qty*i.qty,
 										'standard_qty':me.qty,
+										'source_warehouse': s__w if i.item != me.item else None,
+										'available_qty': self.get_available_quantity(me.item,s__w) if i.item != me.item else 0
+										
 									},),
 
 				self.append("qty_details",{
@@ -67,6 +78,8 @@ class DownstreamProcesses(Document):
 													'raw_item_name': str(y.item_name),
 													'required_qty':y.qty*i.qty,
 													'standard_qty':y.qty,
+													'source_warehouse': s__w if i.item != y.item else None,
+													'available_qty': self.get_available_quantity(y.item,s__w) if i.item != y.item else 0
 												},),
 								
 				self.append("qty_details",{
@@ -99,6 +112,7 @@ class DownstreamProcesses(Document):
 							'finished_item': l.item,
 							'rejection_type': "MR",
 							'qty': l.mr_qty,
+							'target_warehouse':frappe.get_value("Machine Shop Setting",self.company,"mr_warehouse_dp"),
 							
 						},),
 			if l.cr_qty:
@@ -107,6 +121,7 @@ class DownstreamProcesses(Document):
 							'finished_item': l.item,
 							'rejection_type': "CR",
 							'qty': l.cr_qty,
+							'target_warehouse':frappe.get_value("Machine Shop Setting",self.company,"cr_warehouse_dp"),
 							
 						},),
 			if l.rw_qty:
@@ -115,12 +130,17 @@ class DownstreamProcesses(Document):
 							'finished_item': l.item,
 							'rejection_type': "RW",
 							'qty': l.rw_qty,
+							'target_warehouse':frappe.get_value("Machine Shop Setting",self.company,"rw_warehouse_dp"),
 							
 						},),
 	@frappe.whitelist()
 	def before_submit(self):		
 		self.manifacturing_stock_entry()
 		self.transfer_stock_entry()
+
+	@frappe.whitelist()
+	def before_save(self):
+		self.validate_total_qty()	
 
 
 	@frappe.whitelist()
@@ -164,7 +184,7 @@ class DownstreamProcesses(Document):
 					
 				elif g==peacock:
 					frappe.throw(f'There is Row Item {g.item} present in "Raw Items" table')
-				
+			se.downstream_process = self.name	
 			se.insert()
 			se.save()
 			se.submit()
@@ -193,9 +213,48 @@ class DownstreamProcesses(Document):
 						
 					elif g==peahen:
 						frappe.throw(f'There is Row Item {g.item} present in "Raw Items" table')
-				
+			se.downstream_process = self.name		
 			se.insert()
 			se.save()
 			se.submit()
+
+
+	def get_available_quantity(self,item_code, warehouse):
+		filters = {"item_code": item_code,"warehouse": warehouse}
+		fields = ["SUM(actual_qty) as available_quantity"]
+		result = frappe.get_list("Stock Ledger Entry", filters=filters, fields=fields)
+		
+		if result and result[0].get("available_quantity"):
+			return result[0].get("available_quantity")
+		else:
+			return 0
+		
+	@frappe.whitelist()	
+	def set_available_qty(self):
+		for ri in self.get('raw_items'):
+			if ri.raw_item and ri.source_warehouse:
+				ri.available_qty = self.get_available_quantity(ri.raw_item,ri.source_warehouse)
+
+	@frappe.whitelist()	
+	def validate_total_qty(self):
+		total_item_qty=0
+		for item in self.get('items'):
+			total_item_qty= total_item_qty + item.qty
+	
+		if self.total_qty != total_item_qty:
+			frappe.throw(f'The Total qty is not matched it should be equal to {total_item_qty}')
+		# frappe.throw("hii.......")
+
+
+	@frappe.whitelist()	
+	def test_method(self):
+		rows = self.get('raw_items')
+		for r in rows:
+			if r.item=='1010100007':
+				r.standard_qty=333
+
+		# frappe.throw(str(rows[0].clear()))
+
+
 
 

@@ -12,6 +12,7 @@
   "item",
   "item_name",
   "column_break_mxtjn",
+  "posting_date",
   "company",
   "material_cycle_time",
   "shift_time",
@@ -153,12 +154,18 @@
    "options": "Production Schedule",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-10-13 13:09:03.540537",
+ "modified": "2023-10-18 17:58:21.665675",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Production Schedule",

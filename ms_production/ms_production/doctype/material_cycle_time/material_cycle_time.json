@@ -157,18 +157,20 @@
   {
    "fieldname": "from_date",
    "fieldtype": "Date",
-   "label": "From Date"
+   "label": "From Date",
+   "reqd": 1
   },
   {
    "default": "2100-01-01",
    "fieldname": "to_date",
    "fieldtype": "Date",
+   "hidden": 1,
    "label": "To date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-17 09:53:23.971176",
+ "modified": "2023-10-18 14:29:43.833935",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Material Cycle Time",

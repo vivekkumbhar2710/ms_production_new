@@ -1,0 +1,187 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:company",
+ "creation": "2023-10-17 14:54:35.472571",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company_tab",
+  "company",
+  "tab_break_6vgao",
+  "target_warehouse_p",
+  "column_break_eoox4",
+  "source_warehouse_p",
+  "column_break_l0etv",
+  "cr_warehouse_p",
+  "column_break_r8udq",
+  "mr_warehouse_p",
+  "column_break_jnuwm",
+  "rw_warehouse_p",
+  "downstream_processes_tab",
+  "target_warehouse_dp",
+  "column_break_doijp",
+  "source_warehouse_dp",
+  "column_break_9qhep",
+  "cr_warehouse_dp",
+  "column_break_17rny",
+  "mr_warehouse_dp",
+  "column_break_6nmnw",
+  "rw_warehouse_dp"
+ ],
+ "fields": [
+  {
+   "fieldname": "tab_break_6vgao",
+   "fieldtype": "Section Break",
+   "label": "Production Process"
+  },
+  {
+   "fieldname": "target_warehouse_p",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Target Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_eoox4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_warehouse_p",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Source Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_l0etv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cr_warehouse_p",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "CR Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_r8udq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mr_warehouse_p",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "MR Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_jnuwm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rw_warehouse_p",
+   "fieldtype": "Link",
+   "label": "RW Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "downstream_processes_tab",
+   "fieldtype": "Section Break",
+   "label": "Downstream Processes"
+  },
+  {
+   "fieldname": "target_warehouse_dp",
+   "fieldtype": "Link",
+   "label": "Target Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_doijp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_warehouse_dp",
+   "fieldtype": "Link",
+   "label": "Source Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_9qhep",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cr_warehouse_dp",
+   "fieldtype": "Link",
+   "label": "CR Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_17rny",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mr_warehouse_dp",
+   "fieldtype": "Link",
+   "label": "MR Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_6nmnw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rw_warehouse_dp",
+   "fieldtype": "Link",
+   "label": "RW Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "unique": 1
+  },
+  {
+   "fieldname": "company_tab",
+   "fieldtype": "Tab Break",
+   "label": "Company"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-17 15:05:23.258875",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Machine Shop Setting",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

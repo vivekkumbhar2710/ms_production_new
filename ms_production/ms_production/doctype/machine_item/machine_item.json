@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-04 14:08:27.484598",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "operation",
+  "cycle_time",
+  "operation_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "operation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Operation",
+   "options": "Operation Master",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cycle_time",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Cycle Time(In min)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "operation.operation",
+   "fieldname": "operation_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Operation Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-10-18 13:00:03.491486",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Machine Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

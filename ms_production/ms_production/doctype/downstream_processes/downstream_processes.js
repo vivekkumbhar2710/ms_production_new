@@ -14,6 +14,19 @@ frappe.ui.form.on('Downstream Processes', {
     }
 });
 
+frappe.ui.form.on('Downstream Processes', {
+    button: function(frm) {
+
+        frm.call({
+			method:'test_method',
+			doc:frm.doc,
+		})
+        frm.refresh_field('raw_items')
+    }
+});
+
+
+
 // ============================================================= Downstream Processes =================================================
 
 
@@ -34,6 +47,8 @@ frappe.ui.form.on('Downstream Processes', {
 
 frappe.ui.form.on('Downstream Processes', {
     downstream_process: function(frm) {
+
+        if (frm.doc.production && frm.doc.production.length > 0) {
 		frm.clear_table("items");
 		frm.refresh_field('items');
 		frm.clear_table("raw_items");
@@ -44,6 +59,7 @@ frappe.ui.form.on('Downstream Processes', {
 			method:'method_to_set_data_in_table',
 			doc:frm.doc,
 		})
+    }
     }
 });
 
@@ -177,6 +193,15 @@ frappe.ui.form.on('Downstream Items Production', {
     }
 });
 
+frappe.ui.form.on('Downstream Items Production', {
+    item: function(frm) {
+        frm.call({
+			method:'set_warehouse_if_not',
+			doc:frm.doc,
+		})
+    }
+});
+
 
 
 // frappe.ui.form.on('Downstream Items Production', {
@@ -189,3 +214,14 @@ frappe.ui.form.on('Downstream Items Production', {
 // 		})
 //     }
 // });
+
+// ============================================================= Downstream Raw Items Production =================================================
+
+frappe.ui.form.on('Downstream Raw Items Production', {
+    source_warehouse: function(frm) {
+        frm.call({
+			method:'set_available_qty',
+			doc:frm.doc,
+		})
+    }
+});

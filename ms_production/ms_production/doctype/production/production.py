@@ -32,8 +32,9 @@ class Production(Document):
 		for i in self.get('qty_details'):
 			#considering ok qty only bcos other are rejected or need rework
 			if i.item == itemName:
-				return i.ok_qty
-		return 0
+				p= i.ok_qty
+				# return i.ok_qty
+		return p if p else 0
        
 	def getRawItemWareHouse(self, itemName):
 		for i in self.get('raw_items'):
@@ -126,14 +127,17 @@ class Production(Document):
 			stock_entry.insert()
 			stock_entry.submit()
 
-		
+	@frappe.whitelist()
+	def set_warehouse_in_item(self):
+		for mom in self.get('items'):
+			mom.target_warehouse = frappe.get_value("Machine Shop Setting",self.company,"target_warehouse_p")
 	
 	#adding items from item table into raw table
 	@frappe.whitelist()
 	def update_raw_data(self,index,raw_items,item_operations):
-		
+		self.set_warehouse_in_item()
 		items = self.get('items')
- 
+		s___w = frappe.get_value("Machine Shop Setting",self.company,"source_warehouse_p")
 		for ind in range(len(raw_items)):
 			if(index-1==ind):
 				self.append("raw_items",{
@@ -141,6 +145,8 @@ class Production(Document):
 					'raw_item' : frappe.get_value("Item",items[ind].item,"raw_material"),
 					'item_name': frappe.get_value("Item",items[ind].item,"item_name"),
 					'raw_item_name': frappe.get_value("Item",(frappe.get_value("Item",items[ind].item,"raw_material")),"item_name"),
+					'source_warehouse': s___w ,
+					"available_qty" : self.get_available_quantity(frappe.get_value("Item",items[ind].item,"raw_material"),s___w),
 				},)
 				self.append("item_operations",{
 					'item':items[ind].item,
@@ -148,10 +154,6 @@ class Production(Document):
 				
 			else:
 				self.append("raw_items",raw_items[ind])
-
-
-
-
 
 				self.append("item_operations",item_operations[ind])
 				
@@ -162,6 +164,9 @@ class Production(Document):
 				'raw_item' : frappe.get_value("Item",items[index-1].item,"raw_material"),
 				'item_name': frappe.get_value("Item",items[index-1].item,"item_name"),
 				'raw_item_name': frappe.get_value("Item",(frappe.get_value("Item",items[index-1].item,"raw_material")),"item_name"),
+				'source_warehouse': frappe.get_value("Machine Shop Setting",self.company,"source_warehouse_p"),
+				"available_qty" : self.get_available_quantity(frappe.get_value("Item",items[index-1].item,"raw_material"),s___w)
+				
 			},),
 			self.append("item_operations",{
 				'item':items[index-1].item,
@@ -194,14 +199,17 @@ class Production(Document):
      
 	@frappe.whitelist()
 	def calculate_rejection_qty(self):
-		ms_setting = frappe.get_doc("MS Production Setting")
+		ms_setting = frappe.get_doc("Machine Shop Setting",self.company)
 		for i in self.get('qty_details'):
 			if(getVal(i.cr_qty)!=0):
 				self.append("rejected_items_reasons",{
 					'finished_item': i.item,
 					'rejection_type': 'CR',
 					'qty': getVal(i.cr_qty),
-					'target_warehouse': ms_setting.cr_item_warehouse
+					'target_warehouse': ms_setting.cr_warehouse_p,
+					'job_order':i.job_order,
+					'operation':i.operation,
+
 				},),
     
 			if(getVal(i.mr_qty)!=0):
@@ -209,7 +217,9 @@ class Production(Document):
 					'finished_item': i.item,
 					'rejection_type': 'MR',
 					'qty': getVal(i.mr_qty),
-					'target_warehouse': ms_setting.mr_item_warehouse
+					'target_warehouse': ms_setting.mr_warehouse_p,
+					'job_order':i.job_order,
+					'operation':i.operation,
 				},),
 
 			if(getVal(i.rw_qty)!=0):
@@ -217,7 +227,9 @@ class Production(Document):
 					'finished_item': i.item,
 					'rejection_type': 'RW',
 					'qty': getVal(i.rw_qty),
-					'target_warehouse': ms_setting.rw_item_warehouse
+					'target_warehouse': ms_setting.rw_warehouse_p,
+					'job_order':i.job_order,
+					'operation':i.operation,
 				},),
 		self.calculate_qty()
 		
@@ -237,10 +249,19 @@ class Production(Document):
 			t_total_qty += getVal(i.total_qty)
 			t_total_earned_time += getVal(i.earned_min)
    
-		self.total_qty = t_total_qty
 		self.total_earned_minutes = t_total_earned_time
 		self.time_difference = self.required_time - self.total_earned_minutes
-		 
+		self.calculet_self_total_qty()
+
+	@frappe.whitelist()
+	def calculet_self_total_qty(self):
+		total_total_qty=0
+		for item in self.get('items'):
+			for ops_item in self.get('qty_details'):
+				if item.item == ops_item.item:
+					total_total_qty= total_total_qty + ops_item.total_qty
+					break
+		self.total_qty = total_total_qty
     
 	@frappe.whitelist()
 	def calculate_boring(self):
@@ -309,12 +330,14 @@ class Production(Document):
 		self.validate_qty_on_earned_min()
 
 	def before_submit(self):
-		pass
+		self.setdatainitemfield()
+		
 
     	# pass
 	def on_submit(self):
 		self.create_manufacture_stock_entry()
 		self.create_transfer_stock_entry()
+		
 		pass
 		
 
@@ -464,27 +487,33 @@ class Production(Document):
 
 	@frappe.whitelist()
 	def calculate_total_weges(self):
-		weges_per_min = 0
+		weges_per_min_of_op = 0
+		weges_per_min_of_su = 0
 		total_weges =0
-		cor = frappe.get_all("Wages Master" ,
-					   						filters = {"Employee": self.operator},
-											fields = ["name"])
+		cor = frappe.get_all("Wages Master",filters = {"Employee": self.operator},fields = ["name"])
 		if cor:
 			cos = frappe.get_all("Child Wages Master",filters = {"parent": cor[0].name ,"from_date": ['<=',self.date]},fields = ["wages_per_hour"], order_by = 'from_date DESC')
-			# frappe.throw(str(cos[0].wages_per_hour))
-			# (cos[0].wages_per_hour)
 			if cos:
-				weges_per_min = (cos[0].wages_per_hour)/60
-				for g in self.get("qty_details"):
-					g.wages_per_item = weges_per_min* g.earned_min
+				weges_per_min_of_op = (cos[0].wages_per_hour)/60
 
-				for gpp in self.get("qty_details"):
-					total_weges = total_weges + gpp.wages_per_item
+		mor = frappe.get_all("Wages Master",filters = {"Employee": self.supervisor},fields = ["name"])
+		if mor:
+			mos = frappe.get_all("Child Wages Master",filters = {"parent": mor[0].name ,"from_date": ['<=',self.date]},fields = ["wages_per_hour"], order_by = 'from_date DESC')
+			if mos:
+				weges_per_min_of_su = (mos[0].wages_per_hour)/60
 
-				self.wages = total_weges
+
+		weges_per_min = weges_per_min_of_op + weges_per_min_of_su
+		# frappe.throw(str(weges_per_min))
+		for g in self.get("qty_details"):
+			g.wages_per_item = weges_per_min* g.earned_min
+
+		for gpp in self.get("qty_details"):
+			total_weges = total_weges + gpp.wages_per_item
+
+		self.wages = total_weges
 				
-			else:
-				frappe.throw(f"There is not wages define for {self.operator} in which between {self.date} Present ")
+
 
 
 	@frappe.whitelist()
@@ -493,17 +522,23 @@ class Production(Document):
 		word.clear()
 		cource = self.get('raw_items')
 		cource.clear()
+		conquer = self.get('item_operations')
+		conquer.clear()
+		fought = self.get('qty_details')
+		fought.clear()
 
 		for d in self.get('job_order'):
 			item_code_for_job =frappe.get_value("Job Order",str(d.job_order),"item")
+			target =frappe.get_value("Job Order",str(d.job_order),"target_warehouse")
 			self.append("items",{
 					'job_order': str(d.job_order) ,
 					'item': item_code_for_job,
 					'item_name': frappe.get_value("Item",item_code_for_job,"item_name"),
-					'target_warehouse': frappe.get_value("Job Order",str(d.job_order),"target_warehouse")
+					'target_warehouse': target if target else frappe.get_value("Machine Shop Setting",self.company,"target_warehouse_p")
 				},),
-
-			raw_item = frappe.get_value("Material Cycle Time" ,(frappe.get_value("Production Schedule",(frappe.get_value("Job Order",(d.job_order),"production_schedule")),"material_cycle_time")),"raw_item")
+			ps = (frappe.get_value("Job Order",(d.job_order),"production_schedule"))
+			mct =(frappe.get_value("Production Schedule",ps,"material_cycle_time"))
+			raw_item = frappe.get_value("Material Cycle Time" ,mct,"raw_item")
 			source = frappe.get_value("Job Order",str(d.job_order),"source_warehouse")
 			self.append("raw_items",{
 					'job_order': str(d.job_order) ,
@@ -511,10 +546,33 @@ class Production(Document):
 					'item_name': frappe.get_value("Item",item_code_for_job,"item_name"),
 					'raw_item': raw_item,
 					'raw_item_name': frappe.get_value("Item",raw_item,"item_name"),
-					'source_warehouse': source,
+					'source_warehouse': source if source else frappe.get_value("Machine Shop Setting",self.company,"source_warehouse_p"),
 					'boring_weight': frappe.get_value("Item",str(raw_item),"weight") -frappe.get_value("Item",str(item_code_for_job),"weight"),
 					'available_qty' : self.get_available_quantity(raw_item, source)
 				},),
+			vikas = frappe.get_all("Machine Item",filters = {"parent": mct },fields = ["operation","cycle_time"], order_by = 'idx ASC')
+			for desh in vikas:
+				self.append("item_operations",{
+						'job_order': str(d.job_order) ,
+						'item': item_code_for_job,
+						'operation': desh.operation,
+						'cycle_time': desh.cycle_time,
+					},),
 
-  
+				self.append("qty_details",{
+						'job_order': str(d.job_order) ,
+						'item': item_code_for_job,
+						'operation': desh.operation,
+						'cycle_time': desh.cycle_time,
+					},),
+
+	@frappe.whitelist()
+	def setdatainitemfield(self):
+		
+		list_items = []
+		for item in self.get('items'):
+			list_items.append(item.item_name)
+		# frappe.throw(list_items)
+		self.do_not_delete =str(list_items)
+
 

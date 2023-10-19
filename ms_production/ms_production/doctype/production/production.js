@@ -3,30 +3,30 @@
 
 
 
-frappe.ui.form.on('Production', {
-    job_order: function(frm) {
-			debugger
-            frappe.call({
-                method: 'set_filters_for_items',
-                doc: frm.doc,
-                callback: function(r) {
-                    if (r.message) {
-                        var k = r.message;
-                        frm.set_query("item", "items", function(doc, cdt, cdn) {
-                            let d = locals[cdt][cdn];
-                            return {
-                                filters: [
-                                    ['Item', 'item_group', '=', 'Products'],
-                                    ['Item', 'name', 'in', k],
-                                ]
-                            };
-                        });
-                    }
-                }
-			});
+// frappe.ui.form.on('Production', {
+//     job_order: function(frm) {
+// 			debugger
+//             frappe.call({
+//                 method: 'set_filters_for_items',
+//                 doc: frm.doc,
+//                 callback: function(r) {
+//                     if (r.message) {
+//                         var k = r.message;
+//                         frm.set_query("item", "items", function(doc, cdt, cdn) {
+//                             let d = locals[cdt][cdn];
+//                             return {
+//                                 filters: [
+//                                     ['Item', 'item_group', '=', 'Products'],
+//                                     ['Item', 'name', 'in', k],
+//                                 ]
+//                             };
+//                         });
+//                     }
+//                 }
+// 			});
         
-    }
-});
+//     }
+// });
 
 
 
@@ -60,12 +60,12 @@ frappe.ui.form.on('Production', {
 
 
 frappe.ui.form.on("Production", {
-    refresh: function(frm) {
+    setup: function(frm) {
             frm.set_query("job_order", function() { // Replace with the name of the link field
                 return {
                     filters: [
                         ["Job Order", "company", '=', frm.doc.company],// Replace with your actual filter criteria
-
+						["Job Order", "docstatus", '=', 1],
 					]
                 };
             });
@@ -104,55 +104,55 @@ frappe.ui.form.on('Item operations', {
 	}
 }); 
 
-frappe.ui.form.on('Items Production', {
-	item: function(frm) {
+// frappe.ui.form.on('Items Production', {
+// 	item: function(frm) {
  
-			frappe.call({
-				method: 'set_filters_IOM',
-				doc: frm.doc,
-				callback: function(r) {
-					if(r.message) {
-						var k = r.message[0];
-						var m = r.message[1]; 
-						frm.set_query("operation", "item_operations", function(doc, cdt, cdn) {
-							let d = locals[cdt][cdn];
-							return {
-								filters: [['name', 'in',m],]
-							};
-						});
+// 			frappe.call({
+// 				method: 'set_filters_IOM',
+// 				doc: frm.doc,
+// 				callback: function(r) {
+// 					if(r.message) {
+// 						var k = r.message[0];
+// 						var m = r.message[1]; 
+// 						frm.set_query("operation", "item_operations", function(doc, cdt, cdn) {
+// 							let d = locals[cdt][cdn];
+// 							return {
+// 								filters: [['name', 'in',m],]
+// 							};
+// 						});
 						      
 					
-					}
-				}
-			});
+// 					}
+// 				}
+// 			});
 			
-		}
-	});
+// 		}
+// 	});
 
-	frappe.ui.form.on('Production', {
-		refresh: function(frm) {
+	// frappe.ui.form.on('Production', {
+	// 	refresh: function(frm) {
 	 
-				frappe.call({
-					method: 'set_filters_IOM',
-					doc: frm.doc,
-					callback: function(r) {
-						if(r.message) {
-							var k = r.message[0];
-							var m = r.message[1]; 
-							frm.set_query("operation", "item_operations", function(doc, cdt, cdn) {
-								let d = locals[cdt][cdn];
-								return {
-									filters: [['name', 'in',m],]
-								};
-							});
+	// 			frappe.call({
+	// 				method: 'set_filters_IOM',
+	// 				doc: frm.doc,
+	// 				callback: function(r) {
+	// 					if(r.message) {
+	// 						var k = r.message[0];
+	// 						var m = r.message[1]; 
+	// 						frm.set_query("operation", "item_operations", function(doc, cdt, cdn) {
+	// 							let d = locals[cdt][cdn];
+	// 							return {
+	// 								filters: [['name', 'in',m],]
+	// 							};
+	// 						});
 								  
 						
-						}
-					}
-				});
+	// 					}
+	// 				}
+	// 			});
 				
-			}
-		});
+	// 		}
+	// 	});
 	
 
 
@@ -581,20 +581,22 @@ frappe.ui.form.on('Production', {
 // 		});
 
 
-// 	},
+// 	},fjkdhfjdhfjhdjfh
 // });hiiiiiii
 
 //h9i
 frappe.ui.form.on('Production', {
     job_order: function(frm) {
 		// frm.clear_table("items")
-		// frm.refresh_field('items')
+		// frm.refresh_field('items')item_operations
         frappe.call({
 			method: 'after_select_job_order',
 			doc: frm.doc,
 		});
 		frm.refresh_field('items')
 		frm.refresh_field('raw_items')
+		frm.refresh_field('item_operations')
+		frm.refresh_field('qty_details')
     }
 });
 
