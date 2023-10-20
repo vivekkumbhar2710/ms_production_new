@@ -68,7 +68,7 @@
   {
    "fieldname": "item",
    "fieldtype": "Link",
-   "label": "Item",
+   "label": "Finished Item",
    "options": "Item",
    "reqd": 1
   },
@@ -152,7 +152,7 @@
   {
    "fieldname": "default_warehouse_section",
    "fieldtype": "Section Break",
-   "label": "default Warehouse"
+   "label": "Default Warehouse"
   },
   {
    "fieldname": "target_warehouse",
@@ -220,7 +220,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-10-18 17:59:16.934733",
+ "modified": "2023-10-19 14:20:35.639167",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Job Order",
@@ -228,6 +228,8 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -237,6 +239,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

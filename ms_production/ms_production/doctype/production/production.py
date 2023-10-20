@@ -252,6 +252,7 @@ class Production(Document):
 		self.total_earned_minutes = t_total_earned_time
 		self.time_difference = self.required_time - self.total_earned_minutes
 		self.calculet_self_total_qty()
+		self.validate_ok_qty()
 
 	@frappe.whitelist()
 	def calculet_self_total_qty(self):
@@ -262,7 +263,17 @@ class Production(Document):
 					total_total_qty= total_total_qty + ops_item.total_qty
 					break
 		self.total_qty = total_total_qty
-    
+
+	@frappe.whitelist()
+	def validate_ok_qty(self):
+		for akki in self.get('qty_details'):
+			for janu in self.get('qty_details'):
+				if akki.idx < janu.idx and str(akki.job_order)==str(janu.job_order) and akki.item == janu.item:
+					if akki.ok_qty < janu.total_qty:
+						frappe.throw(f'Total Qty of operation {janu.operation} for item {janu.item} is should not be greater than the "Ok Qty" of operation {akki.operation}')
+
+
+
 	@frappe.whitelist()
 	def calculate_boring(self):
 		for i in self.get('raw_items'):
@@ -488,7 +499,7 @@ class Production(Document):
 	@frappe.whitelist()
 	def calculate_total_weges(self):
 		weges_per_min_of_op = 0
-		weges_per_min_of_su = 0
+		# weges_per_min_of_su = 0
 		total_weges =0
 		cor = frappe.get_all("Wages Master",filters = {"Employee": self.operator},fields = ["name"])
 		if cor:
@@ -496,15 +507,7 @@ class Production(Document):
 			if cos:
 				weges_per_min_of_op = (cos[0].wages_per_hour)/60
 
-		mor = frappe.get_all("Wages Master",filters = {"Employee": self.supervisor},fields = ["name"])
-		if mor:
-			mos = frappe.get_all("Child Wages Master",filters = {"parent": mor[0].name ,"from_date": ['<=',self.date]},fields = ["wages_per_hour"], order_by = 'from_date DESC')
-			if mos:
-				weges_per_min_of_su = (mos[0].wages_per_hour)/60
-
-
-		weges_per_min = weges_per_min_of_op + weges_per_min_of_su
-		# frappe.throw(str(weges_per_min))
+		weges_per_min = weges_per_min_of_op 
 		for g in self.get("qty_details"):
 			g.wages_per_item = weges_per_min* g.earned_min
 
@@ -530,15 +533,18 @@ class Production(Document):
 		for d in self.get('job_order'):
 			item_code_for_job =frappe.get_value("Job Order",str(d.job_order),"item")
 			target =frappe.get_value("Job Order",str(d.job_order),"target_warehouse")
+
 			self.append("items",{
 					'job_order': str(d.job_order) ,
 					'item': item_code_for_job,
 					'item_name': frappe.get_value("Item",item_code_for_job,"item_name"),
 					'target_warehouse': target if target else frappe.get_value("Machine Shop Setting",self.company,"target_warehouse_p")
 				},),
+			
 			ps = (frappe.get_value("Job Order",(d.job_order),"production_schedule"))
 			mct =(frappe.get_value("Production Schedule",ps,"material_cycle_time"))
 			raw_item = frappe.get_value("Material Cycle Time" ,mct,"raw_item")
+
 			source = frappe.get_value("Job Order",str(d.job_order),"source_warehouse")
 			self.append("raw_items",{
 					'job_order': str(d.job_order) ,

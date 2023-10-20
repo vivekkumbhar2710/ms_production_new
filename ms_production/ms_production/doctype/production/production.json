@@ -8,15 +8,21 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "company",
   "date",
+  "posting_time",
+  "column_break_2jl4x",
   "supervisor",
   "operator",
-  "expense_account_for_wages",
   "job_order",
-  "column_break_2jl4x",
-  "company",
+  "column_break_y1py8",
+  "supervisor_name",
+  "operator_name",
+  "column_break_gvuyd",
   "shift_time",
   "required_time",
+  "column_break_pgxlt",
+  "expense_account_for_wages",
   "wages",
   "do_not_delete",
   "section_break_tfgrr",
@@ -48,7 +54,8 @@
    "default": "Today",
    "fieldname": "date",
    "fieldtype": "Date",
-   "label": "Date"
+   "label": "Posting Date",
+   "reqd": 1
   },
   {
    "fieldname": "downtime_reason_details",
@@ -153,7 +160,7 @@
   {
    "fieldname": "qty_details",
    "fieldtype": "Table",
-   "label": "Qty Details",
+   "label": "Quantity Details",
    "options": "Qty Details",
    "reqd": 1
   },
@@ -209,6 +216,7 @@
   {
    "fieldname": "rejected_items_reasons",
    "fieldtype": "Table",
+   "ignore_user_permissions": 1,
    "label": "Rejected Items Reasons",
    "options": "Item Rejection Reason"
   },
@@ -244,6 +252,37 @@
    "hidden": 1,
    "label": "Do Not Delete",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_gvuyd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_pgxlt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Now",
+   "fieldname": "posting_time",
+   "fieldtype": "Time",
+   "label": "Posting Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_y1py8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "supervisor.employee_name",
+   "fieldname": "supervisor_name",
+   "fieldtype": "Data",
+   "label": "Supervisor Name"
+  },
+  {
+   "fetch_from": "operator.employee_name",
+   "fieldname": "operator_name",
+   "fieldtype": "Data",
+   "label": "Operator Name"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -263,7 +302,7 @@
    "link_fieldname": "name"
   }
  ],
- "modified": "2023-10-19 10:37:09.275856",
+ "modified": "2023-10-20 10:20:22.898533",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Production",

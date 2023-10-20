@@ -9,6 +9,9 @@ frappe.ui.form.on('Job Order', {
 
 frappe.ui.form.on('Job Order', {
 	production_schedule(frm,cdt,cdn) {
+
+		frm.clear_table("raw_item");
+		frm.refresh_field('raw_item');
 		frm.call({
 			method:'set_data_raw_item',
 			doc:frm.doc,

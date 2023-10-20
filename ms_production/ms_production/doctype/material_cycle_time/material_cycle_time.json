@@ -57,7 +57,7 @@
   {
    "fieldname": "item",
    "fieldtype": "Link",
-   "label": "Item",
+   "label": "Finished Item",
    "options": "Item",
    "reqd": 1
   },
@@ -170,7 +170,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-18 14:29:43.833935",
+ "modified": "2023-10-19 14:16:03.782336",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Material Cycle Time",

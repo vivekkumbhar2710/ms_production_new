@@ -1,0 +1,27 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2023-10-19 18:15:05.821120",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{\"filters\":[],\"fields\":[[\"name\",\"Production\"],[\"date\",\"Production\"],[\"company\",\"Production\"],[\"operator\",\"Production\"],[\"supervisor\",\"Production\"],[\"job_order\",\"Item Rejection Reason\"],[\"operation\",\"Item Rejection Reason\"],[\"rejection_reason\",\"Item Rejection Reason\"],[\"finished_item\",\"Item Rejection Reason\"],[\"rejection_type\",\"Item Rejection Reason\"],[\"qty\",\"Item Rejection Reason\"],[\"idx\",\"Item Rejection Reason\"],[\"target_warehouse\",\"Item Rejection Reason\"]],\"order_by\":\"`tabProduction`.`modified` asc\",\"add_totals_row\":0,\"page_length\":20,\"column_widths\":{\"name\":120,\"date\":120,\"company\":120,\"operator\":120,\"supervisor\":120,\"Item Rejection Reason:job_order\":120,\"Item Rejection Reason:operation\":120,\"Item Rejection Reason:rejection_reason\":120,\"Item Rejection Reason:finished_item\":120,\"Item Rejection Reason:rejection_type\":120,\"Item Rejection Reason:qty\":120,\"Item Rejection Reason:idx\":120,\"Item Rejection Reason:target_warehouse\":120},\"group_by\":null}",
+ "modified": "2023-10-19 18:17:57.657713",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Rejection Analysis",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Production",
+ "report_name": "Rejection Analysis",
+ "report_type": "Report Builder",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}
