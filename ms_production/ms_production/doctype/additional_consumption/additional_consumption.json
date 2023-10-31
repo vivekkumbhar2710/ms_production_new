@@ -1,0 +1,177 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-10-23 13:39:16.676604",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "date",
+  "expense_account_for_consumption",
+  "column_break_uq0am",
+  "company",
+  "reference_doc",
+  "reference_process",
+  "section_break_xhqxa",
+  "items_table",
+  "section_break_e4kxi",
+  "column_break_1zzot",
+  "column_break_p2gbw",
+  "column_break_ornlp",
+  "column_break_zygen",
+  "total_ok_quantity",
+  "section_break_26bx8",
+  "supervisor_wages_table",
+  "consumption_table",
+  "add_cons_items",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "column_break_uq0am",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reference_doc",
+   "fieldtype": "Select",
+   "label": "Reference Doc",
+   "options": "\nProduction\nDownstream Processes"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Additional Consumption",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_xhqxa",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items_table",
+   "fieldtype": "Table",
+   "label": "Items Table",
+   "options": "Additional Consumption Items"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "consumption_table",
+   "fieldtype": "Table",
+   "label": "Consumption Table",
+   "options": "Additional Consumption Consumption"
+  },
+  {
+   "depends_on": "eval:doc.reference_doc !=\"Production\" && doc.reference_doc!=\"\"",
+   "fieldname": "reference_process",
+   "fieldtype": "Link",
+   "label": "Reference Process",
+   "options": "Downstream Processes Master"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "ACN-"
+  },
+  {
+   "fieldname": "total_ok_quantity",
+   "fieldtype": "Float",
+   "label": "Total Ok Quantity",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_break_e4kxi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_1zzot",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_p2gbw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ornlp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_zygen",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_26bx8",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "supervisor_wages_table",
+   "fieldtype": "Table",
+   "label": "Supervisor Wages Table",
+   "options": "Additional Consumption Supervisor Wages"
+  },
+  {
+   "fieldname": "expense_account_for_consumption",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Expense Account For Consumption",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "add_cons_items",
+   "fieldtype": "Currency",
+   "label": "Total additional Consumption of items"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Stock Entry",
+   "link_fieldname": "additional_consumption"
+  }
+ ],
+ "modified": "2023-10-26 14:35:15.843546",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Additional Consumption",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

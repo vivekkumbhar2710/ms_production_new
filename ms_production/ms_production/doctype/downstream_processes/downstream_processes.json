@@ -9,17 +9,22 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
+  "company",
   "date",
+  "column_break_5micb",
   "supervisor",
   "operator",
-  "expense_account_for_wages",
   "production",
+  "column_break_djlt1",
+  "supervisor_name",
+  "operator_name",
+  "downstream_process",
   "column_break_2jl4x",
-  "company",
   "shift_time",
   "required_time",
+  "column_break_dmhkt",
+  "expense_account_for_wages",
   "wages",
-  "downstream_process",
   "button",
   "section_break_tfgrr",
   "items",
@@ -226,6 +231,30 @@
    "fieldname": "button",
    "fieldtype": "Button",
    "label": "Button"
+  },
+  {
+   "fieldname": "column_break_5micb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_djlt1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "supervisor.employee_name",
+   "fieldname": "supervisor_name",
+   "fieldtype": "Data",
+   "label": "Supervisor Name"
+  },
+  {
+   "fetch_from": "operator.employee_name",
+   "fieldname": "operator_name",
+   "fieldtype": "Data",
+   "label": "Operator Name"
+  },
+  {
+   "fieldname": "column_break_dmhkt",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -237,7 +266,7 @@
    "table_fieldname": "stock enry"
   }
  ],
- "modified": "2023-10-19 10:50:10.372896",
+ "modified": "2023-10-26 15:34:18.971755",
  "modified_by": "Administrator",
  "module": "Ms Production",
  "name": "Downstream Processes",

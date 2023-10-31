@@ -49,7 +49,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-04 11:47:55.883669",
+ "modified": "2023-10-26 11:14:47.959223",
  "modified_by": "Administrator",
  "module": "Machine shop",
  "name": "Operation Master",
@@ -70,6 +70,7 @@
    "write": 1
   }
  ],
+ "search_fields": "operation",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

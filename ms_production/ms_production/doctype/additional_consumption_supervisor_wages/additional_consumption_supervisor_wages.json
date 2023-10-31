@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-26 12:20:34.888633",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "supervisor_id",
+  "supervisor_name",
+  "wages_per_hours",
+  "work_hours"
+ ],
+ "fields": [
+  {
+   "fieldname": "supervisor_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supervisor ID",
+   "options": "Employee",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "supervisor_id.employee_name",
+   "fieldname": "supervisor_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Supervisor Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "wages_per_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Wages Per Hours",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "work_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Work Hours",
+   "precision": "2",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-10-26 12:23:46.627708",
+ "modified_by": "Administrator",
+ "module": "Ms Production",
+ "name": "Additional Consumption Supervisor Wages",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

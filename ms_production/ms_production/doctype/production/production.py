@@ -447,7 +447,7 @@ class Production(Document):
 		# for do in self.get('items'):
 		for v in self.get('item_operations'):
 			v.cycle_time=0
-			demo =frappe.get_all('Material Cycle Time', filters={'item':v.item ,'company':self.company ,"from_date" :["<",self.date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
+			demo =frappe.get_all('Material Cycle Time', filters={'item':v.item ,'company':self.company ,"from_date" :["<=",self.date]} ,fields=['name',], order_by='from_date desc',limit = 1 )
 			if demo:
 				for t in demo:
 					kaju=frappe.get_all('Machine Item', filters={'parent':t.name,'operation':v.operation} ,fields=['cycle_time'])
