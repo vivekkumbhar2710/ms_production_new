@@ -6,3 +6,4 @@ frappe.ui.form.on('Operation Master', {
 
 	// }
 });
+

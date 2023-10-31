@@ -638,7 +638,7 @@ frappe.ui.form.on('Production', {
 
 	},
 });
-
+////git ////hiii
 // frappe.ui.form.on('Items Production', {
 // 	item: function(frm) {
 // 		frm.set_query("item", "item_operations", function(doc, cdt, cdn) {
